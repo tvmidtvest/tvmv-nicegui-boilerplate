@@ -1,5 +1,6 @@
 import os
 
+import _header
 import config
 import home
 import page
@@ -11,11 +12,13 @@ logger = config.get_logger(__name__)
 
 @ui.page("/")
 def index_page() -> None:
+    _header.content()
     home.content()
 
 
 @ui.page("/page")
 def index_page() -> None:
+    _header.content()
     page.content()
 
 

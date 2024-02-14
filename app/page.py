@@ -7,8 +7,10 @@ logger = config.get_logger(__name__)
 
 
 def content():
-    ui.markdown("Welcome to the other page!")
-    ui.button("Go to the home page", on_click=lambda: ui.open("/"))
+
+    with ui.element("div").classes("text-center w-full md:w-1/2 mx-auto"):
+        ui.markdown("Welcome to the other page!")
+        ui.button("Go to the home page", on_click=lambda: ui.open("/"))
 
     my_var = os.environ.get("MY_VAR", "default value")
 
