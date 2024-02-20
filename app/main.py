@@ -22,4 +22,4 @@ def index_page() -> None:
         page.content()
 
 
-ui.run(favicon="🚀", title="My app")
+ui.run(favicon="🚀", title=os.environ.get("APP_NAME", "TVMV App"), port=8085)
