@@ -5,7 +5,7 @@ services:
     image: zauberzeug/nicegui:latest
     restart: always
     ports:
-      - 8888:8085
+      - ${APP_PORT}:${APP_PORT}
     volumes:
       - ./app:/app # mounting local app directory
       - ./logs:/logs # mounting local logs directory
