@@ -1,15 +1,41 @@
 import os
 
 import config
-from nicegui import ui
+from nicegui import events, ui
 
 logger = config.get_logger(__name__)
 
 
 def content():
-    ui.markdown("Welcome to the other page!")
+
+    def handle_click(e: events.GenericEventArguments) -> None:
+        logger.info(f"Row clicked: {e.args}")
+        ui.notification(f"Row clicked: {e.args}")
+
+    with ui.element("div").classes("mb-4"):
+        columns = [
+            {
+                "name": "title",
+                "label": "Title",
+                "field": "title",
+                "align": "left",
+            },
+            {
+                "name": "year",
+                "label": "Year",
+                "field": "year",
+                "align": "right",
+            },
+        ]
+
+        data = [
+            {"title": "The Shawshank Redemption", "year": 1994, "id": 1},
+            {"title": "The Godfather", "year": 1972, "id": 2},
+            {"title": "The Dark Knight", "year": 2008, "id": 3},
+        ]
+
+        table = ui.table(columns=columns, rows=data, row_key="id", title="Movies")
+
+        table.on("row-click", lambda e: handle_click(e))
+
     ui.button("Go to the home page", on_click=lambda: ui.open("/"))
-
-    my_var = os.environ.get("MY_VAR", "default value")
-
-    logger.info(f"Page content was displayed: {my_var}")
